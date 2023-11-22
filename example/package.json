@@ -1,12 +1,17 @@
 {
-  "name": "example",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "name": "@techsavvyash/nestjs-monitor",
+  "version": "0.0.4",
+  "description": "Prometheus and Grafana based monitoring setup for NestJS Apps",
+  "author": "Team SamagraX (https://github.com/Samagra-Development)",
+  "private": false,
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "nest build",
+    "build": "tsc --project tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -22,6 +27,7 @@
   "dependencies": {
     "@nestjs/cache-manager": "^2.1.0",
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-fastify": "^9.0.0",

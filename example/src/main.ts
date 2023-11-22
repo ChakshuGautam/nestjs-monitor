@@ -3,13 +3,21 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { AppModule } from './app.module';
+import { MonitorModule } from './app.module';
 import { MonitoringService } from './monitoring/monitoring.service';
+import { ResponseTimeInterceptor } from './interceptors/response-time.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
+    MonitorModule,
     new FastifyAdapter(),
+  );
+
+  app.useGlobalInterceptors(
+    new ResponseTimeInterceptor(
+      'global_interceptor',
+      '../monitor/grafana/provisioning/dashboards/response_times.json',
+    ),
   );
 
   process.on('exit', (code) => {
@@ -35,6 +43,6 @@ async function bootstrap() {
     await monitoringService.onExit();
     process.exit(0);
   });
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();
